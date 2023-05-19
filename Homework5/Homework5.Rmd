@@ -1,0 +1,93 @@
+---
+title: "Homework5"
+output: html_document
+date: "2023-05-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 3.1 Import
+
+Set up libraries and import
+
+```{r}
+#Load ggplot2 to visualize data
+library('ggplot2')
+#load readr to import CSV
+library(readr)
+
+Iris <- read.csv('./Iris.csv')
+class(Iris)
+
+head(Iris)
+```
+
+# 3.2 Scatter Plot
+
+make a scatter plot with x-axis: Sepal.Length and y-axis: Sepal.Width, and the species should be shown in different colors.
+
+```{r}
+ggplot(data=Iris,aes( x=SepalLengthCm, y=SepalWidthCm, color=Species)) + geom_point() + theme_minimal() + ggtitle("Sepal Length vs. Sepal width") + xlab("Sepal Length in cm") + ylab("Sepal Width in cm")
+
+```
+
+# 3.3 Regression Line
+
+add regression line for the previous plot with the whole data set (regardless of the species)
+
+```{r}
+a = ggplot(data=Iris,aes( x=SepalLengthCm, y=SepalWidthCm)) + geom_point() + theme_minimal()
+
+b = a +geom_smooth(method = "lm",
+              formula = y ~ x)
+
+b
+```
+
+# 3.4 Pearson correlation
+
+calculate the Pearson correlation for this plot
+
+```{r}
+
+
+correlation <- cor(Iris$SepalLengthCm, Iris$SepalWidthCm )
+correlation
+
+```
+
+# 3.5 Box plot
+
+make the boxplot for Petal.Width with 3 species separately in the x-axis in different colors
+
+```{r}
+ggplot(data=Iris,aes(x=Species, y=PetalWidthCm,color=Species)) + geom_boxplot() +theme_minimal()
+
+```
+
+# 3.6. Histogram
+
+make the histogram for Petal.Width with 3 species separately in x-axis in different colors
+
+```{r}
+ggplot(data=Iris,aes(x=PetalWidthCm, fill=Species)) + geom_histogram() 
+
+```
+
+# T-Test
+
+run the t-test of Petal.Width between setosa and virginica, and give the conclusion if the width is a statistically significant difference between 2 species
+
+##Conclusion
+The width is...
+
+```{r}
+#Filter Dataset so it only includes the two desired species
+pwSet <- Iris$PetalWidthCm[(Iris$Species == "Iris-setosa")]
+pwVirg <- Iris$PetalWidthCm[(Iris$Species == "Iris-virginica")]
+#T-Test
+t.test(pwSet,pwVirg)
+
+```
