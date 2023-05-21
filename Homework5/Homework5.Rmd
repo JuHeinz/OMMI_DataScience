@@ -20,8 +20,6 @@ library(readr)
 
 Iris <- read.csv('./Iris.csv')
 class(Iris)
-
-head(Iris)
 ```
 
 # 3.2 Scatter Plot
@@ -67,7 +65,7 @@ ggplot(data=Iris,aes(x=Species, y=PetalWidthCm,color=Species)) + geom_boxplot() 
 
 ```
 
-# 3.6. Histogram
+# 3.6 Histogram
 
 make the histogram for Petal.Width with 3 species separately in x-axis in different colors
 
@@ -76,12 +74,11 @@ ggplot(data=Iris,aes(x=PetalWidthCm, fill=Species)) + geom_histogram()
 
 ```
 
-# T-Test
+# 3.7 T-Test
 
 run the t-test of Petal.Width between setosa and virginica, and give the conclusion if the width is a statistically significant difference between 2 species
 
-##Conclusion
-The width is...
+The p-value is lower than 0.05 so its likely statistically significant.
 
 ```{r}
 #Filter Dataset so it only includes the two desired species
